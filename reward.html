@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pahala Points — Relova Syariah</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gd:#1a3c2e;--gm:#2a5c45;--gl:#3d7a5e;--gp:#d6ede2;--gg:#eef8f2;
+  --cr:#faf7f0;--ww:#f4ede0;--td:#161616;--tm:#4a4a4a;--tl:#8a8a8a;
+  --ac:#c9a84c;--aw:#e8c87a;--bd:rgba(42,92,69,.12);
+  --sm:0 2px 12px rgba(0,0,0,.06);--md:0 8px 30px rgba(0,0,0,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cr);color:var(--td);overflow-x:hidden;}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:13px 48px;background:rgba(250,247,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.18);transition:all .3s;}
+nav.scrolled{box-shadow:var(--sm);}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.logo-mark{width:37px;height:37px;background:var(--gd);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Amiri',serif;font-size:20px;font-weight:700;color:var(--ac);box-shadow:0 4px 14px rgba(26,60,46,.25);}
+.logo-teks{display:flex;flex-direction:column;line-height:1;}
+.logo-nama{font-family:'Amiri',serif;font-size:21px;font-weight:700;color:var(--gd);}
+.logo-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ac);}
+nav ul{display:flex;list-style:none;gap:2px;}
+nav ul li a{text-decoration:none;color:var(--tm);font-size:13.5px;font-weight:500;padding:8px 12px;border-radius:8px;transition:all .2s;}
+nav ul li a:hover,nav ul li a.active{color:var(--gm);background:var(--gp);}
+.nav-cta{background:var(--ac)!important;color:var(--gd)!important;border-radius:10px!important;font-weight:700!important;}
+
+/* ===== HERO ===== */
+.page-hero{
+  padding:120px 48px 60px;
+  background:linear-gradient(160deg,var(--gd),var(--gm));
+  text-align:center;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cpattern id='g' x='0' y='0' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Cpolygon points='30,2 35,20 52,10 42,26 58,30 44,35 50,52 36,44 32,60 30,44 28,60 24,44 10,52 16,35 2,30 18,26 8,10 25,20' fill='none' stroke='white' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23g)'/%3E%3C/svg%3E") repeat;
+  opacity:.06;pointer-events:none;
+}
+.h-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);color:white;font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:18px;border:1px solid rgba(255,255,255,.22);}
+.hero-bis{font-family:'Amiri',serif;font-size:18px;color:var(--ac);margin-bottom:12px;opacity:.85;position:relative;}
+.page-hero h1{font-family:'Amiri',serif;font-size:clamp(30px,5vw,52px);font-weight:700;color:white;line-height:1.1;margin-bottom:10px;position:relative;}
+.page-hero h1 em{color:var(--ac);font-style:normal;}
+.page-hero p{color:rgba(255,255,255,.72);font-size:15px;max-width:440px;margin:0 auto;position:relative;}
+
+/* ===== MAIN LAYOUT ===== */
+.main-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;max-width:1080px;margin:0 auto;padding:52px 48px;}
+
+/* ===== POIN CARD ===== */
+.poin-card{
+  background:var(--gd);border-radius:26px;padding:36px;color:white;
+  margin-bottom:22px;position:relative;overflow:hidden;
+}
+/* Islamic geometric watermark inside card */
+.poin-card::before{
+  content:'';position:absolute;right:-50px;top:-50px;
+  width:200px;height:200px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,3 58,28 84,15 68,38 97,42 72,55 85,80 60,67 56,95 50,72 44,95 40,67 15,80 28,55 3,42 32,38 16,15 42,28' fill='none' stroke='white' stroke-width='0.8'/%3E%3C/svg%3E") center/cover;
+  opacity:.05;
+}
+.pc-bis{font-family:'Amiri',serif;font-size:15px;color:var(--ac);margin-bottom:10px;opacity:.8;}
+.pc-lbl{font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:7px;}
+.pc-points{font-family:'Amiri',serif;font-size:72px;font-weight:700;color:var(--ac);line-height:1;text-shadow:0 0 30px rgba(201,168,76,.25);}
+.pc-level{font-size:15px;font-weight:600;color:rgba(255,255,255,.8);margin:7px 0 20px;}
+.prog-track{background:rgba(255,255,255,.1);height:9px;border-radius:9px;overflow:hidden;margin-bottom:7px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--ac),var(--aw));border-radius:9px;transition:width 1.2s ease;}
+.prog-next{font-size:12px;color:rgba(255,255,255,.45);}
+.poin-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px;}
+.pa-item{background:rgba(255,255,255,.07);border-radius:12px;padding:13px;text-align:center;border:1px solid rgba(255,255,255,.06);}
+.pa-item strong{display:block;font-size:14px;color:white;margin-bottom:2px;}
+.pa-item span{font-size:11.5px;color:rgba(255,255,255,.5);}
+
+/* ===== VOUCHER SECTION ===== */
+.voucher-sec{margin-bottom:22px;}
+.vs-head{font-family:'Amiri',serif;font-size:24px;color:var(--gd);margin-bottom:6px;}
+.vs-sub{font-size:13.5px;color:var(--tl);margin-bottom:20px;}
+.voucher-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+
+.voucher-card{
+  background:white;border-radius:22px;border:1.5px solid var(--bd);
+  padding:24px 20px;text-align:center;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+/* Colored top accent per card */
+.voucher-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.voucher-card:nth-child(1)::before{background:linear-gradient(90deg,var(--gp),var(--gm));}
+.voucher-card:nth-child(2)::before{background:linear-gradient(90deg,var(--ac),var(--aw));}
+.voucher-card:nth-child(3)::before{background:linear-gradient(90deg,var(--gm),var(--gd));}
+.voucher-card:hover{transform:translateY(-6px);box-shadow:var(--md);border-color:rgba(201,168,76,.3);}
+
+.v-icon{font-size:32px;margin-bottom:10px;}
+.v-disc{font-family:'Amiri',serif;font-size:30px;font-weight:700;color:var(--gd);margin-bottom:3px;}
+.v-name{font-size:14px;font-weight:700;color:var(--gd);margin-bottom:8px;}
+.v-cost{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--gp);color:var(--gm);
+  font-size:13px;font-weight:700;padding:5px 13px;border-radius:20px;margin-bottom:14px;
+  border:1px solid rgba(42,92,69,.12);
+}
+.v-cost .vc-icon{font-size:14px;}
+.btn-redeem{
+  width:100%;padding:11px;background:var(--gd);color:white;border:none;
+  border-radius:11px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13.5px;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.btn-redeem:hover{background:#0f2a1e;}
+.btn-redeem:disabled{background:rgba(42,92,69,.18);cursor:not-allowed;color:var(--tl);}
+.v-stock{font-size:11.5px;color:var(--tl);margin-top:7px;}
+
+/* Sedekah voucher (special) */
+.voucher-sedekah{
+  background:linear-gradient(135deg,var(--gd),var(--gm));
+  border-radius:22px;padding:24px 28px;margin-bottom:22px;
+  display:flex;align-items:center;gap:20px;color:white;
+  border:1px solid rgba(201,168,76,.2);
+  position:relative;overflow:hidden;
+}
+.voucher-sedekah::before{
+  content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,3 58,28 84,15 68,38 97,42 72,55 85,80 60,67 56,95 50,72 44,95 40,67 15,80 28,55 3,42 32,38 16,15 42,28' fill='none' stroke='white' stroke-width='0.8'/%3E%3C/svg%3E") center/cover;
+  opacity:.06;
+}
+.vs-icon{font-size:40px;flex-shrink:0;}
+.vs-text h4{font-family:'Amiri',serif;font-size:19px;font-weight:700;color:var(--aw);margin-bottom:5px;}
+.vs-text p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:12px;}
+.btn-sedekah{
+  background:var(--ac);color:var(--gd);border:none;
+  padding:10px 22px;border-radius:11px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+}
+.btn-sedekah:hover{background:var(--aw);}
+
+/* ===== ATURAN VOUCHER ===== */
+.rules-card{
+  background:white;border-radius:20px;border:1.5px solid var(--bd);
+  padding:24px;margin-bottom:22px;
+}
+.rules-card h4{font-family:'Amiri',serif;font-size:18px;color:var(--gd);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.15);}
+.rule-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(42,92,69,.06);font-size:13.5px;color:var(--tm);}
+.rule-item:last-child{border:none;}
+.rule-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+
+/* ===== CARA DAPAT POIN ===== */
+.earn-card{background:white;border-radius:20px;border:1.5px solid var(--bd);padding:24px;}
+.earn-card h4{font-family:'Amiri',serif;font-size:18px;color:var(--gd);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.15);}
+.earn-item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(42,92,69,.06);}
+.earn-item:last-child{border:none;}
+.earn-left{display:flex;align-items:center;gap:11px;}
+.earn-icon{width:36px;height:36px;background:var(--gp);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.earn-info h5{font-size:13.5px;font-weight:700;color:var(--td);}
+.earn-info p{font-size:12px;color:var(--tl);margin-top:1px;}
+.earn-poin{font-size:14.5px;font-weight:700;color:var(--gm);}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:sticky;top:90px;}
+
+.history-card{background:white;border-radius:22px;border:1.5px solid var(--bd);padding:24px;}
+.history-card h3{font-family:'Amiri',serif;font-size:19px;color:var(--gd);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.15);}
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--bd);}
+.hist-item:last-child{border:none;}
+.hl{display:flex;align-items:center;gap:11px;}
+.h-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.hg{background:var(--gp);}
+.ha{background:rgba(201,168,76,.18);}
+.h-info h4{font-size:13.5px;font-weight:700;color:var(--td);}
+.h-info p{font-size:11.5px;color:var(--tl);margin-top:1px;}
+.h-poin{font-size:14px;font-weight:700;}
+.hp-plus{color:var(--gm);}
+.hp-minus{color:#A32D2D;}
+
+/* Level card */
+.level-card{
+  background:linear-gradient(135deg,var(--gd),var(--gm));
+  border-radius:22px;padding:24px;color:white;margin-top:16px;
+  position:relative;overflow:hidden;
+}
+.level-card::before{
+  content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,3 58,28 84,15 68,38 97,42 72,55 85,80 60,67 56,95 50,72 44,95 40,67 15,80 28,55 3,42 32,38 16,15 42,28' fill='none' stroke='white' stroke-width='0.6'/%3E%3C/svg%3E") center/cover;
+  opacity:.06;
+}
+.level-card h4{font-family:'Amiri',serif;font-size:17px;font-weight:700;color:var(--aw);margin-bottom:14px;}
+.level-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1);}
+.level-item:last-child{border:none;}
+.l-badge{font-size:18px;flex-shrink:0;}
+.l-info h5{font-size:13.5px;font-weight:700;color:white;}
+.l-info p{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:1px;}
+.l-req{font-size:12.5px;font-weight:700;color:var(--ac);margin-left:auto;}
+
+/* Ayat box in sidebar */
+.ayat-box{
+  background:rgba(255,255,255,.08);border-radius:14px;
+  padding:16px 18px;margin-top:16px;border-left:3px solid var(--ac);
+}
+.ayat-arab{font-family:'Amiri',serif;font-size:16px;color:var(--aw);direction:rtl;text-align:right;line-height:1.8;margin-bottom:6px;}
+.ayat-tr{font-size:11.5px;color:rgba(255,255,255,.5);font-style:italic;line-height:1.55;}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;bottom:26px;right:26px;
+  background:var(--gd);color:white;
+  padding:12px 20px;border-radius:14px;font-size:13.5px;font-weight:600;
+  box-shadow:var(--md);display:none;z-index:9999;
+  border:1px solid rgba(201,168,76,.25);
+}
+
+/* ===== SUCCESS OVERLAY ===== */
+.sov{position:fixed;inset:0;background:rgba(26,60,46,.9);backdrop-filter:blur(8px);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sov.show{opacity:1;pointer-events:all;}
+.sb{
+  background:var(--cr);border-radius:30px;padding:40px;
+  text-align:center;max-width:420px;width:100%;
+  transform:scale(.92) translateY(14px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.sov.show .sb{transform:scale(1) translateY(0);}
+.sb-bis{font-family:'Amiri',serif;font-size:16px;color:var(--ac);margin-bottom:8px;}
+.sb h2{font-family:'Amiri',serif;font-size:24px;color:var(--gd);margin-bottom:8px;}
+.sb p{color:var(--tm);font-size:13.5px;line-height:1.65;margin-bottom:20px;}
+.voucher-preview{
+  background:var(--gp);border-radius:16px;padding:18px;
+  margin-bottom:20px;border:1px solid rgba(42,92,69,.1);
+}
+.vp-disc{font-family:'Amiri',serif;font-size:38px;font-weight:700;color:var(--gm);}
+.vp-lbl{font-size:13px;color:var(--gl);font-weight:600;}
+.vp-code{
+  font-family:monospace;font-size:15px;font-weight:700;
+  color:var(--gd);background:white;padding:6px 16px;
+  border-radius:9px;margin-top:8px;display:inline-block;
+  letter-spacing:2px;border:1px solid var(--bd);
+}
+.btn-ok{
+  width:100%;padding:13px;background:var(--gd);color:white;border:none;
+  border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;margin-bottom:9px;
+  transition:background .2s;
+}
+.btn-ok:hover{background:#0f2a1e;}
+.btn-sec{
+  width:100%;padding:12px;background:transparent;color:var(--gm);
+  border:1.5px solid var(--gm);border-radius:14px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;
+  transition:background .2s;
+}
+.btn-sec:hover{background:var(--gp);}
+
+/* ===== FADE ===== */
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ===== FOOTER ===== */
+footer{background:#0a1e14;color:rgba(255,255,255,.4);text-align:center;padding:28px;font-size:13px;}
+.foot-bis{font-family:'Amiri',serif;font-size:16px;color:var(--ac);margin-bottom:10px;opacity:.7;}
+footer span{color:rgba(255,255,255,.8);}
+
+@media(max-width:900px){
+  nav{padding:12px 20px;}nav ul{display:none;}
+  .main-layout{grid-template-columns:1fr;padding:28px 22px;}
+  .voucher-grid{grid-template-columns:1fr 1fr;}
+  .sidebar{position:static;}
+  .page-hero{padding:110px 24px 56px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="logo" href="index.html">
+    <div class="logo-mark">ر</div>
+    <div class="logo-teks"><span class="logo-nama">Relova</span><span class="logo-tag">Platform Fashion Halal &amp; Syariah</span></div>
+  </a>
+  <ul>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Virtual Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html" class="active">Relove Points</a></li>
+    <li><a href="premium.html" class="nav-cta">✦ Premium</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="h-chip">Relove Points</div>
+  <div class="hero-bis">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <h1>Setiap Kebaikan<br>Bernilai <em>Relove Points</em></h1>
+  <p>Donasi, daur ulang, dan transaksi halal di Relova menghasilkan relove Points yang bisa kamu tukar diskon atau donasikan kembali.</p>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+  <div>
+
+    <!-- POIN CARD -->
+    <div class="poin-card fade-up">
+      <div class="pc-bis">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+      <div class="pc-lbl">Relove Points Kamu</div>
+      <div class="pc-points" id="pcPoints">0</div>
+      <div class="pc-level" id="pcLevel">🥉 Mukmin Bronze</div>
+      <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="prog-next" id="progNext">Memuat...</div>
+      <div class="poin-actions">
+        <div class="pa-item"><strong>🤲 Infaq</strong><span>+10 poin/item</span></div>
+        <div class="pa-item"><strong>♻️ Amanah Drop</strong><span>+15 poin/item</span></div>
+        <div class="pa-item"><strong>🛍️ Beli Halal</strong><span>+20 poin/trx</span></div>
+        <div class="pa-item"><strong>💎 Gold Member</strong><span>2× semua poin</span></div>
+      </div>
+    </div>
+
+    <!-- TUKAR VOUCHER -->
+    <div class="voucher-sec fade-up">
+      <div class="vs-head">Tukar Relove Points</div>
+      <div class="vs-sub">Tukarkan poinmu dengan voucher diskon belanja di Marketplace, atau sedekahkan kembali ke lembaga sosial</div>
+
+      <div class="voucher-grid">
+        <!-- Voucher 1 -->
+        <div class="voucher-card fade-up" style="transition-delay:.04s">
+          <div class="v-icon">🎫</div>
+          <div class="v-disc">5%</div>
+          <div class="v-name">Voucher Diskon Halal</div>
+          <div class="v-cost"><span class="vc-icon">✨</span> 120 poin</div>
+          <button class="btn-redeem" id="btn120" onclick="tukar(120,'5%','HALAL5')">Tukar Sekarang</button>
+          <div class="v-stock">Min. belanja Rp50.000</div>
+        </div>
+        <!-- Voucher 2 -->
+        <div class="voucher-card fade-up" style="transition-delay:.08s">
+          <div class="v-icon">🎁</div>
+          <div class="v-disc">10%</div>
+          <div class="v-name">Voucher Diskon Berkah</div>
+          <div class="v-cost"><span class="vc-icon">✨</span> 240 poin</div>
+          <button class="btn-redeem" id="btn240" onclick="tukar(240,'10%','BERKAH10')">Tukar Sekarang</button>
+          <div class="v-stock">Min. belanja Rp100.000</div>
+        </div>
+        <!-- Voucher 3 -->
+        <div class="voucher-card fade-up" style="transition-delay:.12s">
+          <div class="v-icon">⭐</div>
+          <div class="v-disc">20%</div>
+          <div class="v-name">Voucher Gold Amanah</div>
+          <div class="v-cost"><span class="vc-icon">✨</span> 350 poin</div>
+          <button class="btn-redeem" id="btn350" onclick="tukar(350,'20%','GOLD20')">Tukar Sekarang</button>
+          <div class="v-stock">Min. belanja Rp150.000</div>
+        </div>
+      </div>
+
+      <!-- SEDEKAH POIN -->
+      <div class="voucher-sedekah fade-up">
+        <div class="vs-icon">🤲</div>
+        <div class="vs-text">
+          <h4>Sedekahkan Relove Pointsmu</h4>
+          <p>Alih-alih voucher diskon, kamu bisa menyedekahkan poinmu langsung ke lembaga sosial mitra Relova. 100 poin = Rp5.000 yang disalurkan ke panti asuhan dan pesantren.</p>
+          <button class="btn-sedekah" onclick="tukarSedekah()">🤲 Sedekahkan 100 Poin</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATURAN VOUCHER -->
+    <div class="rules-card fade-up">
+      <h4>📋 Ketentuan Penukaran Poin</h4>
+      <div class="rule-item"><span class="rule-icon">✅</span> Poin yang sudah ditukar tidak dapat dikembalikan</div>
+      <div class="rule-item"><span class="rule-icon">⏳</span> Voucher berlaku 30 hari sejak tanggal penukaran</div>
+      <div class="rule-item"><span class="rule-icon">🚫</span> Maks. 1 voucher per transaksi, tidak dapat digabung promo lain</div>
+      <div class="rule-item"><span class="rule-icon">💎</span> Member Premium mendapat 2× Relove Points di semua aktivitas</div>
+      <div class="rule-item"><span class="rule-icon">🤲</span> Pilihan sedekah poin menjadi amal jariyah yang mengalir terus</div>
+    </div>
+
+    <!-- CARA DAPAT POIN -->
+    <div class="earn-card fade-up">
+      <h4>💡 Cara Kumpulkan Relove Points</h4>
+      <div class="earn-item">
+        <div class="earn-left"><div class="earn-icon">🤲</div><div class="earn-info"><h5>Infaq &amp; Sedekah Pakaian</h5><p>Via fitur Kami Peduli</p></div></div>
+        <div class="earn-poin">+10/item</div>
+      </div>
+      <div class="earn-item">
+        <div class="earn-left"><div class="earn-icon">♻️</div><div class="earn-info"><h5>Circular Drop</h5><p>Daur ulang pakaian bekas</p></div></div>
+        <div class="earn-poin">+15/item</div>
+      </div>
+      <div class="earn-item">
+        <div class="earn-left"><div class="earn-icon">🛍️</div><div class="earn-info"><h5>Transaksi Marketplace</h5><p>Beli pakaian preloved halal</p></div></div>
+        <div class="earn-poin">+20/trx</div>
+      </div>
+      <div class="earn-item">
+        <div class="earn-left"><div class="earn-icon">🚐</div><div class="earn-info"><h5>Gunakan Kurir Relova</h5><p>Bonus penjemputan amanah</p></div></div>
+        <div class="earn-poin">+5 bonus</div>
+      </div>
+      <div class="earn-item">
+        <div class="earn-left"><div class="earn-icon">💎</div><div class="earn-info"><h5>Member Premium</h5><p>2× poin semua aktivitas</p></div></div>
+        <div class="earn-poin">2× lipat</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- RIWAYAT -->
+    <div class="history-card fade-up">
+      <h3>📋 Riwayat Aktivitas</h3>
+      <div class="hist-item">
+        <div class="hl"><div class="h-ic hg">♻️</div><div class="h-info"><h4>Circular Drop</h4><p>2 pakaian · Kemarin</p></div></div>
+        <div class="h-poin hp-plus">+30</div>
+      </div>
+      <div class="hist-item">
+        <div class="hl"><div class="h-ic hg">🤲</div><div class="h-info"><h4>Kami Peduli</h4><p>Panti Harapan Bangsa · 2 hr lalu</p></div></div>
+        <div class="h-poin hp-plus">+10</div>
+      </div>
+      <div class="hist-item">
+        <div class="hl"><div class="h-ic hg">🛍️</div><div class="h-info"><h4>Transaksi Marketplace</h4><p>Gamis Casual · 3 hr lalu</p></div></div>
+        <div class="h-poin hp-plus">+20</div>
+      </div>
+      <div class="hist-item">
+        <div class="hl"><div class="h-ic ha">🎫</div><div class="h-info"><h4>Tukar Voucher 5%</h4><p>Redeem · 5 hr lalu</p></div></div>
+        <div class="h-poin hp-minus">−120</div>
+      </div>
+      <div class="hist-item">
+        <div class="hl"><div class="h-ic hg">🚐</div><div class="h-info"><h4>Bonus Kurir Relova</h4><p>Circular Drop · 1 mgg lalu</p></div></div>
+        <div class="h-poin hp-plus">+5</div>
+      </div>
+    </div>
+
+    <!-- LEVEL MEMBER -->
+    <div class="level-card fade-up">
+      <h4>🏆 Level Mukmin Member</h4>
+      <div class="level-item">
+        <span class="l-badge">🥉</span>
+        <div class="l-info"><h5>Mukmin Bronze</h5><p>Member baru</p></div>
+        <span class="l-req">0–99 poin</span>
+      </div>
+      <div class="level-item">
+        <span class="l-badge">🥈</span>
+        <div class="l-info"><h5>Mukmin Silver</h5><p>+bonus prioritas</p></div>
+        <span class="l-req">100–249 poin</span>
+      </div>
+      <div class="level-item">
+        <span class="l-badge">🥇</span>
+        <div class="l-info"><h5>Mukmin Gold</h5><p>+early access fitur</p></div>
+        <span class="l-req">250+ poin</span>
+      </div>
+      <div class="ayat-box">
+        <div class="ayat-arab">مَن جَاءَ بِالْحَسَنَةِ فَلَهُ عَشْرُ أَمْثَالِهَا</div>
+        <div class="ayat-tr">"Barangsiapa berbuat kebaikan maka ia mendapat pahala sepuluh kali lipatnya..." — QS. Al-An'am: 160</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="sov" id="sOv">
+  <div class="sb">
+    <div style="font-size:52px;margin-bottom:14px">🎉</div>
+    <div class="sb-bis">الْحَمْدُ لِلَّهِ</div>
+    <h2>Alhamdulillah, Berhasil!</h2>
+    <div class="voucher-preview">
+      <div class="vp-disc" id="vDisc">5%</div>
+      <div class="vp-lbl">Voucher Diskon Halal untukmu</div>
+      <div class="vp-code" id="vCode">HALAL5</div>
+    </div>
+    <p id="sMsg">Simpan kode voucher di atas. Berlaku 30 hari. Min. pembelian Rp50.000. Maks. 1 voucher/transaksi.</p>
+    <button class="btn-ok" onclick="location.href='marketplace.html'">🛍️ Belanja di MArketplace →</button>
+    <button class="btn-sec" onclick="document.getElementById('sOv').classList.remove('show');document.body.style.overflow=''">Tutup</button>
+  </div>
+</div>
+
+<!-- SUCCESS SEDEKAH -->
+<div class="sov" id="sOvSedekah">
+  <div class="sb">
+    <div style="font-size:52px;margin-bottom:14px">🤲</div>
+    <div class="sb-bis">جَزَاكَ اللهُ خَيْرًا</div>
+    <h2>Jazakallahu Khairan!</h2>
+    <div class="voucher-preview">
+      <div style="font-size:36px;margin-bottom:6px">🤲</div>
+      <div class="vp-lbl">100 Relove Points disedekahkan</div>
+      <div style="font-size:13px;color:var(--gm);margin-top:8px;font-weight:600;">Setara Rp5.000 untuk panti asuhan</div>
+    </div>
+    <p>Sedekah pointsmu telah disalurkan. Semoga menjadi amal jariyah yang mengalir terus. Barakallahu fiikum.</p>
+    <button class="btn-ok" onclick="document.getElementById('sOvSedekah').classList.remove('show');document.body.style.overflow=''">Alhamdulillah, Kembali</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="foot-bis">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <p>© 2026 <span>Relova</span> — Platform Fashion Halal &amp; Berkelanjutan · Solo, Indonesia</p>
+</footer>
+
+<script>
+let pts = parseInt(localStorage.getItem('points') || '50');
+
+function updateUI() {
+  let lvl = '🥉 Mukmin Bronze', prog = Math.round((pts / 100) * 60), next = (100 - pts) + ' poin lagi menuju Silver 🥈';
+  if (pts >= 250) { lvl = '🥇 Mukmin Gold'; prog = 100; next = 'Alhamdulillah, kamu sudah Mukmin Gold! 🎉'; }
+  else if (pts >= 100) { lvl = '🥈 Mukmin Silver'; prog = Math.round(60 + (pts - 100) / 150 * 40); next = (250 - pts) + ' poin lagi menuju Gold 🥇'; }
+  document.getElementById('pcPoints').innerText = pts;
+  document.getElementById('pcLevel').innerText = lvl;
+  document.getElementById('progFill').style.width = Math.min(100, Math.max(0, prog)) + '%';
+  document.getElementById('progNext').innerText = next;
+  document.getElementById('btn120').disabled = pts < 120;
+  document.getElementById('btn240').disabled = pts < 240;
+  document.getElementById('btn350').disabled = pts < 350;
+}
+
+function tukar(cost, disc, code) {
+  if (pts < cost) { showToast('Pahala Points tidak cukup. Butuh ' + cost + ' poin!'); return; }
+  pts -= cost; localStorage.setItem('points', pts); updateUI();
+  document.getElementById('vDisc').innerText = disc;
+  document.getElementById('vCode').innerText = code + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+  document.getElementById('sMsg').innerText = 'Simpan kode voucher di atas. Berlaku 30 hari sejak ditukar. Min. pembelian Rp50.000. Maks. 1 voucher/transaksi. Tidak dapat digabung promo lain.';
+  document.getElementById('sOv').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+
+function tukarSedekah() {
+  if (pts < 100) { showToast('Pahala Points tidak cukup. Butuh minimal 100 poin!'); return; }
+  pts -= 100; localStorage.setItem('points', pts); updateUI();
+  document.getElementById('sOvSedekah').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+
+function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; clearTimeout(window._t); window._t = setTimeout(() => t.style.display = 'none', 2800); }
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30));
+const obs = new IntersectionObserver(e => e.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); }), { threshold: .1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+updateUI();
+</script>
+</body>
+</html>

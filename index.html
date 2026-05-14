@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relova Syariah — Platform Fashion Halal & Berkelanjutan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --hijau: #1a3c2e;
+      --hijau-mid: #2a5c45;
+      --hijau-terang: #3d7a5e;
+      --hijau-pucat: #d6ede2;
+      --emas: #c9a84c;
+      --emas-terang: #e8c87a;
+      --emas-redup: #8a6f30;
+      --krem: #faf7f0;
+      --krem-hangat: #f4ede0;
+      --putih: #ffffff;
+      --teks-gelap: #161616;
+      --teks-mid: #4a4a4a;
+      --teks-redup: #8a8a8a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--krem);
+      color: var(--teks-gelap);
+      overflow-x: hidden;
+    }
+
+    /* ================================================
+       SALAM OVERLAY (splash screen)
+    ================================================ */
+    #salamOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--hijau);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #salamOverlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .salam-geo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: 0.08;
+    }
+
+    .salam-geo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .salam-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: clamp(28px, 5vw, 52px);
+      color: var(--emas);
+      text-align: center;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .salam-ucap {
+      font-family: 'Amiri', serif;
+      font-size: clamp(22px, 4vw, 42px);
+      color: white;
+      text-align: center;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.5s;
+    }
+
+    .salam-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.8s;
+    }
+
+    .salam-logo {
+      width: 72px;
+      height: 72px;
+      background: var(--emas);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Amiri', serif;
+      font-size: 32px;
+      color: var(--hijau);
+      font-weight: 700;
+      margin-bottom: 8px;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0s;
+      box-shadow: 0 0 40px rgba(201,168,76,0.4);
+    }
+
+    .salam-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 1s;
+    }
+
+    .salam-bar-fill {
+      height: 100%;
+      background: var(--emas);
+      border-radius: 10px;
+      animation: loadBar 2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes loadBar {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================================================
+       ORNAMEN GEOMETRI ISLAM (helper pattern)
+    ================================================ */
+    .geo-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* ================================================
+       NAVBAR
+    ================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(250,247,240,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+      transition: all 0.3s;
+    }
+
+    nav.scrolled {
+      padding: 10px 48px;
+      box-shadow: 0 4px 24px rgba(26,60,46,0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--hijau);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Amiri', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--emas);
+      box-shadow: 0 4px 14px rgba(26,60,46,0.25);
+    }
+
+    .logo-teks {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-nama {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--hijau);
+    }
+
+    .logo-tagline {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--emas);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--teks-mid);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 8px 13px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: var(--hijau);
+      background: var(--hijau-pucat);
+    }
+
+    .nav-cta {
+      background: var(--emas) !important;
+      color: var(--hijau) !important;
+      font-weight: 700 !important;
+      padding: 9px 18px !important;
+      border-radius: 10px !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--emas-redup) !important;
+      color: white !important;
+    }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 110px 60px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Islamic geometric bg */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(26,60,46,0.04) 0%, rgba(201,168,76,0.06) 100%);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 20px;
+      color: var(--emas);
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--hijau-pucat);
+      color: var(--hijau-mid);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 26px;
+      letter-spacing: 0.4px;
+      border: 1px solid rgba(42,92,69,0.15);
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--emas);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    .hero-text h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(38px, 4.5vw, 62px);
+      font-weight: 700;
+      line-height: 1.12;
+      color: var(--hijau);
+      margin-bottom: 22px;
+    }
+
+    .hero-text h1 .emas {
+      color: var(--emas);
+      position: relative;
+    }
+
+    .hero-text h1 .emas::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--emas), transparent);
+      border-radius: 2px;
+    }
+
+    .hero-text p {
+      font-size: 16.5px;
+      color: var(--teks-mid);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+
+    .halal-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .hbadge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border: 1.5px solid var(--hijau-pucat);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--hijau);
+      box-shadow: 0 2px 10px rgba(26,60,46,0.06);
+    }
+
+    .hbadge .icon {
+      font-size: 15px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-utama {
+      background: var(--hijau);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 6px 24px rgba(26,60,46,0.3);
+    }
+
+    .btn-utama:hover {
+      background: #0f2a1e;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(26,60,46,0.38);
+    }
+
+    .btn-emas {
+      background: var(--emas);
+      color: var(--hijau);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 6px 24px rgba(201,168,76,0.35);
+    }
+
+    .btn-emas:hover {
+      background: var(--emas-redup);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--hijau);
+      border: 2px solid var(--hijau);
+      padding: 13px 26px;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline:hover {
+      background: var(--hijau-pucat);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .stat-item {}
+    .stat-angka {
+      font-family: 'Amiri', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--hijau);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--teks-redup);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* === HERO VISUAL === */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-visual-wrap {
+      position: relative;
+      width: 400px;
+      height: 500px;
+    }
+
+    /* Islamic geometric star ornament */
+    .geo-ornamen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 380px;
+      height: 380px;
+      opacity: 0.07;
+      animation: slowSpin 40s linear infinite;
+    }
+
+    @keyframes slowSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .kartu-utama {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 270px;
+      background: white;
+      border-radius: 28px;
+      padding: 32px 28px;
+      box-shadow: 0 24px 72px rgba(26,60,46,0.18);
+      z-index: 3;
+      text-align: center;
+    }
+
+    .kartu-utama .ku-icon {
+      font-size: 52px;
+      margin-bottom: 14px;
+    }
+
+    .kartu-utama h3 {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      color: var(--hijau);
+      font-weight: 700;
+    }
+
+    .kartu-utama p {
+      font-size: 12.5px;
+      color: var(--teks-redup);
+      margin-top: 4px;
+    }
+
+    .kartu-utama .halal-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--hijau-pucat);
+      color: var(--hijau);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 14px;
+      border: 1px solid rgba(42,92,69,0.2);
+    }
+
+    .kartu-belakang1 {
+      position: absolute;
+      width: 220px;
+      height: 300px;
+      top: 20px; right: 10px;
+      background: linear-gradient(140deg, var(--hijau-mid), var(--hijau-terang));
+      border-radius: 24px;
+      z-index: 1;
+      transform: rotate(9deg);
+      box-shadow: 0 16px 48px rgba(26,60,46,0.2);
+    }
+
+    .kartu-belakang2 {
+      position: absolute;
+      width: 220px;
+      height: 300px;
+      bottom: 20px; left: 10px;
+      background: linear-gradient(140deg, var(--emas), var(--emas-terang));
+      border-radius: 24px;
+      z-index: 1;
+      transform: rotate(-7deg);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.25);
+    }
+
+    .badge-melayang {
+      position: absolute;
+      background: white;
+      border-radius: 14px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.1);
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 4;
+    }
+
+    .badge-atas {
+      top: 8px; right: -10px;
+      color: var(--hijau);
+      animation: melayang 3s ease-in-out infinite;
+    }
+
+    .badge-bawah {
+      bottom: 16px; left: -10px;
+      color: var(--emas-redup);
+      animation: melayang 3s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes melayang {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    /* ================================================
+       SECTION WRAPPER
+    ================================================ */
+    section.blok {
+      padding: 90px 60px;
+      position: relative;
+    }
+
+    .label-seksi {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--hijau-pucat);
+      color: var(--hijau-mid);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(42,92,69,0.15);
+    }
+
+    .label-emas {
+      background: rgba(201,168,76,0.12);
+      color: var(--emas-redup);
+      border-color: rgba(201,168,76,0.25);
+    }
+
+    .judul-seksi {
+      font-family: 'Amiri', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 700;
+      color: var(--hijau);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .sub-seksi {
+      color: var(--teks-mid);
+      font-size: 16px;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ================================================
+       FITUR GRID
+    ================================================ */
+    .fitur-seksi {
+      background: white;
+    }
+
+    .fitur-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .fitur-header .sub-seksi {
+      margin: 0 auto;
+    }
+
+    .fitur-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .kartu-fitur {
+      background: var(--krem);
+      border-radius: 22px;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+      border: 1.5px solid transparent;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .kartu-fitur:hover {
+      transform: translateY(-9px);
+      border-color: rgba(201,168,76,0.3);
+      box-shadow: 0 22px 56px rgba(26,60,46,0.1);
+    }
+
+    .kf-img-wrap {
+      width: 100%;
+      height: 185px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .kf-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .kartu-fitur:hover .kf-img-wrap img {
+      transform: scale(1.08);
+    }
+
+    .kf-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 35%, rgba(26,60,46,0.6) 100%);
+    }
+
+    .halal-chip {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--emas);
+      color: var(--hijau);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 10px rgba(201,168,76,0.4);
+    }
+
+    .kf-body {
+      padding: 22px 26px 28px;
+    }
+
+    .kf-ikon {
+      font-size: 32px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: var(--hijau-pucat);
+      border-radius: 14px;
+    }
+
+    .kartu-fitur h3 {
+      font-family: 'Amiri', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--hijau);
+      margin-bottom: 6px;
+    }
+
+    .kartu-fitur p {
+      font-size: 13.5px;
+      color: var(--teks-mid);
+      line-height: 1.6;
+    }
+
+    .kf-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--emas-redup);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 14px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s;
+    }
+
+    .kartu-fitur:hover .kf-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ================================================
+       PAHALA POINTS SECTION
+    ================================================ */
+    .pahala-seksi {
+      background: var(--krem-hangat);
+      overflow: hidden;
+    }
+
+    .pahala-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pahala-kartu {
+      background: var(--hijau);
+      border-radius: 30px;
+      padding: 42px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Islamic star watermark inside card */
+    .pahala-kartu::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 220px; height: 220px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L55 35 L80 20 L65 45 L95 50 L65 55 L80 80 L55 65 L50 95 L45 65 L20 80 L35 55 L5 50 L35 45 L20 20 L45 35 Z' fill='none' stroke='white' stroke-width='1'/%3E%3C/svg%3E") center/cover;
+      opacity: 0.04;
+    }
+
+    .pahala-kartu::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+
+    .pk-label {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+    }
+
+    .pk-poin {
+      font-family: 'Amiri', serif;
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--emas);
+      text-shadow: 0 0 30px rgba(201,168,76,0.3);
+    }
+
+    .pk-level {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-top: 6px;
+      margin-bottom: 22px;
+    }
+
+    .pk-track {
+      background: rgba(255,255,255,0.1);
+      height: 8px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .pk-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--emas), var(--emas-terang));
+      border-radius: 20px;
+      transition: width 1.5s ease;
+    }
+
+    .pk-next {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .pk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pk-item {
+      background: rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .pk-item strong {
+      display: block;
+      font-size: 14.5px;
+      color: white;
+      margin-bottom: 3px;
+    }
+
+    .pahala-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .pahala-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: var(--teks-mid);
+    }
+
+    .pahala-row .pr-icon {
+      width: 40px; height: 40px;
+      background: var(--hijau-pucat);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ================================================
+       NILAI & DAMPAK
+    ================================================ */
+    .dampak-seksi {
+      background: var(--hijau);
+      color: white;
+      overflow: hidden;
+    }
+
+    .dampak-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .dampak-kiri h2 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .dampak-kiri h2 .emas { color: var(--emas); }
+
+    .dampak-kiri p {
+      color: rgba(255,255,255,0.65);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .ayat-box {
+      margin-top: 24px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      border-left: 4px solid var(--emas);
+    }
+
+    .ayat-arab {
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: var(--emas-terang);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .ayat-terjemah {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .dampak-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .dampak-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      padding: 26px 22px;
+      transition: all 0.3s;
+    }
+
+    .dampak-item:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .dampak-angka {
+      font-family: 'Amiri', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--emas);
+      line-height: 1;
+    }
+
+    .dampak-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ================================================
+       PRINSIP SYARIAH SECTION
+    ================================================ */
+    .syariah-seksi {
+      background: white;
+    }
+
+    .syariah-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .syariah-header .sub-seksi {
+      margin: 0 auto;
+    }
+
+    .syariah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .kartu-prinsip {
+      background: var(--krem);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1.5px solid rgba(201,168,76,0.15);
+      transition: all 0.3s;
+    }
+
+    .kartu-prinsip:hover {
+      border-color: var(--emas);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.12);
+    }
+
+    .kp-ikon {
+      font-size: 38px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .kartu-prinsip h4 {
+      font-family: 'Amiri', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--hijau);
+      margin-bottom: 8px;
+    }
+
+    .kartu-prinsip p {
+      font-size: 13px;
+      color: var(--teks-mid);
+      line-height: 1.6;
+    }
+
+    .kp-badge {
+      display: inline-block;
+      background: var(--hijau-pucat);
+      color: var(--hijau-mid);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    /* ================================================
+       CTA SECTION
+    ================================================ */
+    .cta-seksi {
+      background: linear-gradient(135deg, var(--hijau) 0%, #0f2a1e 100%);
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-geo {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+    }
+
+    .cta-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      color: var(--emas);
+      margin-bottom: 18px;
+    }
+
+    .cta-seksi h2 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(30px, 3.5vw, 50px);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+
+    .cta-seksi p {
+      color: rgba(255,255,255,0.65);
+      font-size: 16px;
+      margin-bottom: 38px;
+      line-height: 1.7;
+    }
+
+    .cta-tombol {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+    footer {
+      background: #0a1e14;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 36px 60px;
+      font-size: 13px;
+    }
+
+    footer .footer-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: var(--emas);
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    footer span { color: rgba(255,255,255,0.75); }
+
+    footer .footer-halal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--emas);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    /* ================================================
+       MODAL
+    ================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,60,46,0.88);
+      backdrop-filter: blur(8px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--krem);
+      border-radius: 30px;
+      padding: 48px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(30px) scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      color: var(--emas);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--hijau-pucat);
+      border: none;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--hijau);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(42,92,69,0.2); }
+
+    .modal-box h2 {
+      font-family: 'Amiri', serif;
+      font-size: 30px;
+      color: var(--hijau);
+      margin-bottom: 8px;
+    }
+
+    .modal-sub {
+      color: var(--teks-redup);
+      font-size: 14px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .modal-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 20px;
+      background: white;
+      border-radius: 18px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .step-num {
+      width: 42px; height: 42px;
+      min-width: 42px;
+      background: var(--hijau);
+      color: var(--emas);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Amiri', serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--hijau);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--teks-mid);
+      line-height: 1.6;
+    }
+
+    .modal-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .pillar-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(201,168,76,0.18);
+      text-align: center;
+    }
+
+    .pillar-icon { font-size: 28px; margin-bottom: 8px; }
+    .pillar-card h4 { font-size: 14px; font-weight: 700; color: var(--hijau); }
+    .pillar-card p { font-size: 12px; color: var(--teks-redup); margin-top: 4px; }
+
+    .modal-cta {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ================================================
+       FADE ON SCROLL
+    ================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; }
+      nav ul { display: none; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 60px;
+        text-align: center;
+      }
+      .hero-text p { margin: 0 auto 28px; }
+      .hero-buttons, .halal-badges { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { display: none; }
+      section.blok { padding: 60px 24px; }
+      .pahala-container, .dampak-inner { grid-template-columns: 1fr; gap: 36px; }
+      .dampak-grid { grid-template-columns: 1fr 1fr; }
+      .modal-box { padding: 28px 20px; }
+      .modal-pillars { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================
+     SALAM OVERLAY
+================================================ -->
+<div id="salamOverlay">
+  <!-- Geometric background -->
+  <div class="salam-geo">
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="geo" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+          <polygon points="60,5 70,30 95,15 80,38 110,40 85,55 100,80 75,68 70,95 60,72 50,95 45,68 20,80 35,55 10,40 40,38 25,15 50,30" fill="none" stroke="rgba(201,168,76,1)" stroke-width="0.8"/>
+          <rect x="40" y="40" width="40" height="40" transform="rotate(45,60,60)" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="600" fill="url(#geo)"/>
+    </svg>
+  </div>
+
+  <div class="salam-logo">ر</div>
+  <div class="salam-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <div class="salam-ucap">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+  <div class="salam-sub">Selamat Datang di Relova</div>
+  <div class="salam-bar">
+    <div class="salam-bar-fill"></div>
+  </div>
+</div>
+
+<!-- ================================================
+     NAVBAR
+================================================ -->
+<nav id="navbar">
+  <a class="logo" href="#">
+    <div class="logo-mark">ر</div>
+    <div class="logo-teks">
+      <span class="logo-nama">Relova</span>
+      <span class="logo-tagline">Platform Fashion Halal &amp; Syariah</span>
+    </div>
+  </a>
+
+  <ul>
+    <li><a href="marketplace.html">marketplace</a></li>
+    <li><a href="tryon.html">Virtual Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Relove Points</a></li>
+    <li><a href="premium.html" class="nav-cta">✦ Premium</a></li>
+  </ul>
+</nav>
+
+<!-- ================================================
+     MODAL
+================================================ -->
+<div class="modal-overlay" id="modalTentang">
+  <div class="modal-box">
+    <button class="modal-close" onclick="tutupModal()">✕</button>
+    <div class="modal-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    <h2>Tentang Relova</h2>
+    <p class="modal-sub">Platform circular fashion halal pertama yang mengintegrasikan jual-beli, sedekah, dan daur ulang dalam satu ekosistem digital berbasis nilai Islam</p>
+
+    <div class="modal-steps">
+      <div class="modal-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Jual &amp; Beli Pakaian Halal (marketplace)</h4>
+          <p>Transaksi jual-beli pakaian preloved yang bebas riba, transparan, dan amanah. Setiap produk terverifikasi kondisi dan kehalalannya. Relove Points otomatis bertambah tiap transaksi.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Infaq &amp; Sedekah (Kami Peduli)</h4>
+          <p>Sedekahkan pakaian ka ke panti asuhan dan lembaga sosial terverifikasi. Mitra ekspedisi kami menjemput langsung dari rumahmu — gratis! Setiap donasi dicatat sebagai amal.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">٣</div>
+        <div class="step-content">
+          <h4>Circular Drop: Daur Ulang Bertanggung Jawab</h4>
+          <p>Pakaian tidak layak pakai bukan berarti harus dibuang dan menjadi limbah. Serahkan ke Relova sebagai amanah lingkungan, dan kami salurkan ke mitra daur ulang tekstil terverifikasi.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">٤</div>
+        <div class="step-content">
+          <h4>Relove Points: Nilai dari Setiap Kebaikan</h4>
+          <p>Setiap aksi — berinfaq, amanah drop, dan bertransaksi akan menghasilkan Relova Points. Poin bisa ditukar diskon atau didonasikan ke lembaga sosial sebagai sedekah digital.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-pillars">
+      <div class="pillar-card">
+        <div class="pillar-icon">🕌</div>
+        <h4>100% Halal</h4>
+        <p>Transaksi bebas riba, transparan &amp; amanah</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🤲</div>
+        <h4>Kami Peduli</h4>
+        <p>Donasi terukur langsung ke mitra sosial</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🤖</div>
+        <h4>Virtual Try-On</h4>
+        <p>Coba pakaian secara virtual sebelum membeli</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🌿</div>
+        <h4>Relove Points</h4>
+        <p>Setiap kebaikan menghasilkan nilai nyata</p>
+      </div>
+    </div>
+
+    <div class="modal-cta">
+      <button class="btn-utama" onclick="location.href='marketplace.html'; tutupModal()">Mulai Sekarang</button>
+      <button class="btn-outline" onclick="tutupModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================
+     HERO
+================================================ -->
+<section class="hero" id="beranda">
+  <!-- Geometric watermark -->
+  <div class="geo-bg">
+    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" opacity="0.035">
+      <defs>
+        <pattern id="heroGeo" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+          <polygon points="50,2 58,28 84,12 68,35 97,42 72,54 85,80 62,67 56,94 50,70 44,94 38,67 15,80 28,54 3,42 32,35 16,12 42,28" fill="none" stroke="#2a5c45" stroke-width="0.8"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="700" fill="url(#heroGeo)"/>
+    </svg>
+  </div>
+
+  <div class="hero-text fade-up">
+    <div class="hero-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Platform Circular Fashion Halal #1 di Solo
+    </div>
+
+    <h1>Fashion <span class="emas">Halal</span><br>Dimulai dari<br>Lemarimu</h1>
+
+    <p>Jual, infaqkan, dan daur ulang pakaianmu dalam satu platform berbasis nilai syariah. Bersama Relova, setiap helai kain adalah amanah yang punya makna lebih dari sekadar mode.</p>
+
+    <div class="halal-badges">
+      <div class="hbadge"><span class="icon">✅</span> 100% Halal</div>
+      <div class="hbadge"><span class="icon">🚫</span> Bebas Riba</div>
+      <div class="hbadge"><span class="icon">🤝</span> Transaksi Amanah</div>
+      <div class="hbadge"><span class="icon">🌿</span> Ramah Lingkungan</div>
+    </div>
+
+    <div class="hero-buttons">
+      <button class="btn-utama" onclick="location.href='marketplace.html'">Mulai Sekarang</button>
+      <button class="btn-outline" onclick="bukaModal()">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7.5 5.5v2.7L9 9.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Pelajari Lebih Lanjut
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-angka">12.480+</div>
+        <div class="stat-label">Pakaian beredar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-angka">48 Ton</div>
+        <div class="stat-label">Limbah dikurangi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-angka">3.250+</div>
+        <div class="stat-label">Donasi tersalur</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-visual-wrap">
+      <!-- Spinning Islamic star -->
+      <div class="geo-ornamen">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="100,5 112,60 160,20 128,70 195,80 142,105 168,160 115,128 110,195 100,140 90,195 85,128 32,160 58,105 5,80 72,70 40,20 88,60" fill="none" stroke="#1a3c2e" stroke-width="1.5"/>
+          <polygon points="100,20 109,58 148,32 124,68 180,78 133,100 155,148 107,122 102,175 100,126 98,175 93,122 45,148 67,100 20,78 76,68 52,32 91,58" fill="none" stroke="#2a5c45" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="55" fill="none" stroke="#c9a84c" stroke-width="0.6" stroke-dasharray="4 3"/>
+        </svg>
+      </div>
+
+      <div class="kartu-belakang2"></div>
+      <div class="kartu-belakang1"></div>
+
+      <div class="kartu-utama">
+        <div class="ku-icon">🕌</div>
+        <h3>Relova</h3>
+        <p>Platform Fashion Halal</p>
+        <div class="halal-seal">✅ Terverifikasi Halal</div>
+      </div>
+
+      <div class="badge-melayang badge-atas">🌿 48 Ton Dikurangi</div>
+      <div class="badge-melayang badge-bawah">🤲 +30 Pahala Points</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     PRINSIP SYARIAH
+================================================ -->
+<section class="blok syariah-seksi" id="prinsip">
+  <div class="syariah-header fade-up">
+    <div class="label-seksi label-emas">Prinsip Syariah</div>
+    <h2 class="judul-seksi">Fondasi Nilai Islam dalam<br>Setiap Langkah</h2>
+    <p class="sub-seksi">Relova dibangun di atas 5 prinsip utama ekonomi Islam yang menjamin setiap aktivitas kamu sesuai syariat</p>
+  </div>
+
+  <div class="syariah-grid">
+    <div class="kartu-prinsip fade-up" style="transition-delay:0.05s">
+      <span class="kp-ikon">🚫</span>
+      <h4>Tanpa Riba</h4>
+      <p>Setiap transaksi bebas dari unsur riba. Harga transparan dan disepakati bersama tanpa bunga tersembunyi.</p>
+      <span class="kp-badge">BEBAS RIBA</span>
+    </div>
+    <div class="kartu-prinsip fade-up" style="transition-delay:0.1s">
+      <span class="kp-ikon">🤝</span>
+      <h4>Amanah</h4>
+      <p>Kepercayaan adalah pondasi. Setiap transaksi tercatat, produk terverifikasi, dan penjual berkomitmen jujur.</p>
+      <span class="kp-badge">TERPERCAYA</span>
+    </div>
+    <div class="kartu-prinsip fade-up" style="transition-delay:0.15s">
+      <span class="kp-ikon">🤲</span>
+      <h4>Zakat &amp; Infaq</h4>
+      <p>Sebagian keuntungan platform disalurkan ke zakat &amp; infaq. Donasi pakaianmu adalah sedekah yang mengalir terus.</p>
+      <span class="kp-badge">BERZAKAT</span>
+    </div>
+    <div class="kartu-prinsip fade-up" style="transition-delay:0.2s">
+      <span class="kp-ikon">🌿</span>
+      <h4>Khalifah Bumi</h4>
+      <p>Menjaga bumi adalah kewajiban sebagai khalifah. Daur ulang pakaian adalah bentuk nyata tanggung jawab lingkungan.</p>
+      <span class="kp-badge">RAMAH LINGKUNGAN</span>
+    </div>
+    <div class="kartu-prinsip fade-up" style="transition-delay:0.25s">
+      <span class="kp-ikon">⚖️</span>
+      <h4>Adil &amp; Maslahah</h4>
+      <p>Harga adil bagi pembeli dan penjual. Manfaat tidak hanya untuk individu, tapi untuk komunitas yang lebih luas.</p>
+      <span class="kp-badge">BERKEADILAN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     FITUR GRID
+================================================ -->
+<section class="blok fitur-seksi" id="fitur">
+  <div class="fitur-header fade-up">
+    <div class="label-seksi">Platform Kami</div>
+    <h2 class="judul-seksi">Satu Platform, Banyak Solusi</h2>
+    <p class="sub-seksi">Relova mengintegrasikan seluruh siklus hidup pakaian dalam ekosistem digital yang mudah, berkah, dan sesuai syariah</p>
+  </div>
+
+  <div class="fitur-grid">
+    <div class="kartu-fitur fade-up" onclick="location.href='marketplace.html'" style="transition-delay:0.05s">
+      <div class="kf-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQagY3JN492N23QrO1GrTVHPXeHhmVaMEAGmg&s" alt="Pasar Halal" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2a5c45,#3d7a5e)'">
+        <div class="kf-overlay"></div>
+        <div class="halal-chip"></div>
+      </div>
+      <div class="kf-body">
+        <div class="kf-ikon">🛍️</div>
+        <h3>Marketplace</h3>
+        <p>Jual &amp; beli pakaian preloved berkualitas dengan sistem verifikasi kondisi, bebas riba, dan transaksi yang amanah.</p>
+        <div class="kf-arrow">Lihat Marketplace →</div>
+      </div>
+    </div>
+
+    <div class="kartu-fitur fade-up" onclick="location.href='kamipeduli.html'" style="transition-delay:0.1s">
+      <div class="kf-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR73dRcLAkYIzG29xrJE8xsd5wcAiIh_gjGaw&s" alt="Infaq Sedekah" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#c9a84c,#e8c87a)'">
+        <div class="kf-overlay"></div>
+        <div class="halal-chip"></div>
+      </div>
+      <div class="kf-body">
+        <div class="kf-ikon">❤️</div>
+        <h3>Kami Peduli</h3>
+        <p>Donasikan pakaian layak pakaimu ke panti asuhan dan lembaga sosial terverifikasi. Dijemput gratis dari rumahmu.</p>
+        <div class="kf-arrow">Mulai Bersedekah →</div>
+      </div>
+    </div>
+
+    <div class="kartu-fitur fade-up" onclick="location.href='circulardrop.html'" style="transition-delay:0.15s">
+      <div class="kf-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7UZzRo2dB9e6gXrH2EX9C-iRZ5fzSL8Png&s" alt="Amanah Drop" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a3c2e,#2a5c45)'">
+        <div class="kf-overlay"></div>
+        <div class="halal-chip"></div>
+      </div>
+      <div class="kf-body">
+        <div class="kf-ikon">♻️</div>
+        <h3>Circular Drop</h3>
+        <p>Pakaian rusak bukan berarti harus dibuang. Serahkan sebagai amanah lingkungan dan kami salurkan ke mitra daur ulang terverifikasi.</p>
+        <div class="kf-arrow">Daur Ulang Sekarang →</div>
+      </div>
+    </div>
+
+    <div class="kartu-fitur fade-up" onclick="location.href='tryon.html'" style="transition-delay:0.2s">
+      <div class="kf-img-wrap">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#3d7a5e,#d6ede2);display:flex;align-items:center;justify-content:center;font-size:64px;">🤖</div>
+        <div class="kf-overlay"></div>
+        <div class="halal-chip"></div>
+      </div>
+      <div class="kf-body">
+        <div class="kf-ikon">🤖</div>
+        <h3>Virtual Try-On</h3>
+        <p>Coba pakaian secara virtual menggunakan AI sebelum membeli. Kurangi pembelian yang sia-sia — lebih bijak, lebih berkah.</p>
+        <div class="kf-arrow">Coba Sekarang →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     PAHALA POINTS
+================================================ -->
+<section class="blok pahala-seksi" id="pahala">
+  <div class="pahala-container">
+    <div class="fade-up">
+      <div class="label-seksi">Sistem Points</div>
+      <h2 class="judul-seksi">Aksi Baikmu Bernilai<br>Dunia &amp; Akhirat</h2>
+      <p class="sub-seksi">Setiap donasi, amanah drop, dan transaksi di Relova menghasilkan Relove Points yang bisa ditukar dengan diskon atau didonasikan kembali.</p>
+
+      <div class="pahala-info">
+        <div class="pahala-row">
+          <div class="pr-icon">🤲</div>
+          Infaq 1 pakaian = <strong>+10 Relove Points</strong>
+        </div>
+        <div class="pahala-row">
+          <div class="pr-icon">♻️</div>
+          Amanah Drop = <strong>+15 Relove Points</strong>
+        </div>
+        <div class="pahala-row">
+          <div class="pr-icon">🛍️</div>
+          Transaksi Halal = <strong>+20 Relove Points</strong>
+        </div>
+        <div class="pahala-row">
+          <div class="pr-icon">🎁</div>
+          Poin bisa ditukar diskon atau <strong>didonasikan</strong>
+        </div>
+      </div>
+
+      <button class="btn-utama" style="margin-top:28px" onclick="location.href='reward.html'">Cek Relove Points-ku</button>
+    </div>
+
+    <div class="pahala-kartu fade-up">
+      <div class="pk-label">Relove Points Kamu</div>
+      <div class="pk-poin" id="pahalaPoin">0</div>
+      <div class="pk-level" id="pahalaLevel">🥉 Mukmin Bronze</div>
+
+      <div class="pk-track">
+        <div class="pk-fill" id="pahalaFill" style="width:30%"></div>
+      </div>
+      <div class="pk-next" id="pahalaNext">50 poin lagi menuju Silver 🥈</div>
+
+      <div class="pk-grid">
+        <div class="pk-item">
+          <strong>🤲 Infaq</strong>
+          +10 poin/item
+        </div>
+        <div class="pk-item">
+          <strong>♻️ Circular Drop</strong>
+          +15 poin/item
+        </div>
+        <div class="pk-item">
+          <strong>🛍️ Beli</strong>
+          +20 poin/trx
+        </div>
+        <div class="pk-item">
+          <strong>💝 Tukar</strong>
+          Diskon / Donasi
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     DAMPAK
+================================================ -->
+<section class="blok dampak-seksi" id="dampak">
+  <!-- Geometric watermark -->
+  <div class="geo-bg" style="opacity:0.04">
+    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dampakGeo" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+          <polygon points="60,3 70,38 100,18 80,48 112,52 84,67 100,95 74,80 68,112 60,86 52,112 46,80 20,95 36,67 8,52 40,48 20,18 50,38" fill="none" stroke="white" stroke-width="0.7"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="700" fill="url(#dampakGeo)"/>
+    </svg>
+  </div>
+
+  <div class="dampak-inner">
+    <div class="dampak-kiri fade-up">
+      <div class="label-seksi" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.1)">Dampak Nyata</div>
+      <h2>Bersama Kita Jaga<br><span class="emas">Bumi sebagai Amanah</span></h2>
+      <p>Indonesia menghasilkan 2,3 juta ton limbah tekstil per tahun. Menjaga lingkungan adalah bagian dari iman. Relova hadir untuk membalik tren ini dengan ekosistem fashion halal yang memberdayakan semua pihak.</p>
+
+      <div class="ayat-box">
+        <div class="ayat-arab">وَلَا تُفْسِدُوا فِي الْأَرْضِ بَعْدَ إِصْلَاحِهَا</div>
+        <div class="ayat-terjemah">"Dan janganlah kamu berbuat kerusakan di bumi setelah (diciptakan) dengan baik." — QS. Al-A'raf: 56</div>
+      </div>
+
+      <button class="btn-emas" style="margin-top:28px" onclick="location.href='circulardrop.html'">Mulai Berkontribusi</button>
+    </div>
+
+    <div class="dampak-grid fade-up">
+      <div class="dampak-item">
+        <div class="dampak-angka">12.480+</div>
+        <div class="dampak-label">Pakaian digunakan kembali</div>
+      </div>
+      <div class="dampak-item">
+        <div class="dampak-angka">48 Ton</div>
+        <div class="dampak-label">Limbah tekstil berkurang</div>
+      </div>
+      <div class="dampak-item">
+        <div class="dampak-angka">3.250+</div>
+        <div class="dampak-label">Pakaian diinfaqkan</div>
+      </div>
+      <div class="dampak-item">
+        <div class="dampak-angka">30+</div>
+        <div class="dampak-label">Mitra sosial &amp; pesantren</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     CTA
+================================================ -->
+<section class="blok cta-seksi">
+  <!-- Geometric watermark -->
+  <div class="cta-geo">
+    <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="ctaGeo" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+          <polygon points="50,3 58,28 84,12 68,35 97,42 72,54 85,80 62,67 56,94 50,70 44,94 38,67 15,80 28,54 3,42 32,35 16,12 42,28" fill="none" stroke="white" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="600" fill="url(#ctaGeo)"/>
+    </svg>
+  </div>
+
+  <div class="cta-inner fade-up">
+    <div class="cta-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    <div class="label-seksi" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.12)">Bergabung Sekarang</div>
+    <h2>Mulai Perjalanan<br>Fashion yang Berkah</h2>
+    <p>Bergabung bersama ribuan Muslim di Solo yang sudah memilih gaya hidup halal, berkelanjutan, dan bermakna bersama Relova.</p>
+    <div class="cta-tombol">
+      <button class="btn-emas" onclick="location.href='marketplace.html'">Jelajahi Marketplace</button>
+      <button class="btn-outline" style="border-color:rgba(255,255,255,0.4);color:white" onclick="location.href='premium.html'">✦ Daftar Premium</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     FOOTER
+================================================ -->
+<footer>
+  <div class="footer-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <p>© 2026 <span>Relova</span> — Platform Fashion Halal &amp; Berkelanjutan · Solo, Indonesia</p>
+  <p style="margin-top:6px">Setiap pakaian adalah amanah. Tunaikan dengan berkah.</p>
+  <div>
+    <span class="footer-halal">HALAL CERTIFIED &nbsp;|&nbsp; BEBAS RIBA &nbsp;|&nbsp; ECO-FRIENDLY</span>
+  </div>
+</footer>
+
+<!-- ================================================
+     SCRIPT
+================================================ -->
+<script>
+  /* ===== SALAM OVERLAY & AUDIO ===== */
+  window.addEventListener('load', () => {
+    // Ucapkan salam via Web Speech API
+    setTimeout(() => {
+      if ('speechSynthesis' in window) {
+        const ucap = new SpeechSynthesisUtterance(
+          'Assalamu alaikum warahmatullahi wabarakatuh. Selamat datang di Relova Syariah, platform fashion halal dan berkelanjutan.'
+        );
+        ucap.lang = 'id-ID';
+        ucap.rate = 0.88;
+        ucap.pitch = 1.0;
+        ucap.volume = 0.85;
+
+        // Coba pilih suara Indonesia/Muslim
+        const voices = speechSynthesis.getVoices();
+        const idVoice = voices.find(v => v.lang.startsWith('id'));
+        if (idVoice) ucap.voice = idVoice;
+
+        speechSynthesis.speak(ucap);
+      }
+    }, 600);
+
+    // Hilangkan overlay setelah 3.2 detik
+    setTimeout(() => {
+      const overlay = document.getElementById('salamOverlay');
+      overlay.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 900);
+    }, 3200);
+  });
+
+  // Fallback untuk voices async load
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => {};
+  }
+
+  /* ===== NAVBAR SCROLL ===== */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  /* ===== MODAL ===== */
+  function bukaModal() {
+    document.getElementById('modalTentang').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function tutupModal() {
+    document.getElementById('modalTentang').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modalTentang').addEventListener('click', function(e) {
+    if (e.target === this) tutupModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') tutupModal();
+  });
+
+  /* ===== PAHALA POINTS ===== */
+  let poin = parseInt(localStorage.getItem('points') || '50');
+  let levelText = '🥉 Mukmin Bronze';
+  let progress = 30;
+  let nextText = '50 poin lagi menuju Silver 🥈';
+
+  if (poin >= 200) {
+    levelText = '🥇 Mukmin Gold';
+    progress = 100;
+    nextText = 'Alhamdulillah, kamu sudah Gold! 🎉';
+  } else if (poin >= 100) {
+    levelText = '🥈 Mukmin Silver';
+    progress = 60;
+    nextText = (200 - poin) + ' poin lagi menuju Gold 🥇';
+  } else {
+    nextText = (100 - poin) + ' poin lagi menuju Silver 🥈';
+    progress = Math.round((poin / 100) * 60);
+  }
+
+  document.getElementById('pahalaPoin').innerText = poin;
+  document.getElementById('pahalaLevel').innerText = levelText;
+  document.getElementById('pahalaFill').style.width = progress + '%';
+  document.getElementById('pahalaNext').innerText = nextText;
+
+  /* ===== FADE ON SCROLL ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
